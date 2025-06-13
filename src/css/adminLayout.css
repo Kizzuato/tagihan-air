@@ -1,0 +1,38 @@
+.admin-sidebar {
+  width: 200px;
+  /* top: 0;
+  left: 0; */
+  position: fixed;
+  overflow: auto;
+  height: 100%;
+  background: #5ba4e6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+  z-index: 1;
+  flex: 1;
+}
+
+.admin-logo img {
+  width: 90px;
+  margin-bottom: 32px;
+}
+
+.admin-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.admin-sidebar nav ul li {
+  padding: 14px 0 14px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-sidebar nav ul li:hover {
+  background: #4893d8;
+}

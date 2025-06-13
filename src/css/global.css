@@ -1,0 +1,12 @@
+.global-layout {
+  min-height: 100vh;
+  background: #f5f6fa;
+  display: flex;
+  width: 100%;
+}
+
+.global-main {
+  padding: 48px;
+  margin-left: 200px;
+  width: 100%;
+}

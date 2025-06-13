@@ -1,66 +1,101 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import  { useState, useEffect } from "react";
+import {  useNavigate } from "react-router-dom";
 import "../css/DaftarTagihanLunas.css";
+import "../css/global.css"
 
 const DaftarTagihanLunas = () => {
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [tagihanLunas, setTagihanLunas] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedTagihan, setSelectedTagihan] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogoutClick = () => setShowLogoutModal(true);
-  const handleCloseModal = () => setShowLogoutModal(false);
-  const handleConfirmLogout = () => {
-    // Lakukan proses logout di sini, misal redirect ke login
-    // localStorage.removeItem("token");
-    window.location.href = "/login";
+  useEffect(() => {
+    fetch("http://localhost:5000/tagihanLunas")
+      .then((res) => res.json())
+      .then((data) => setTagihanLunas(Array.isArray(data) ? data : []))
+      .catch(() => setTagihanLunas([]));
+  }, []);
+  const handleDeleteClick = (item) => {
+    setSelectedTagihan(item);
+    setShowDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedTagihan(null);
+  };
+
+  const handleConfirmDelete = () => {
+    fetch(`http://localhost:5000/tagihanLunas/${selectedTagihan.id_tagihan}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          setTagihanLunas(tagihanLunas.filter(t => t.id_tagihan !== selectedTagihan.id_tagihan));
+        }
+        setShowDeleteModal(false);
+        setSelectedTagihan(null);
+      });
   };
 
   return (
-    <div className="daftartagihanlunas-layout">
-      <aside className="daftartagihanlunas-sidebar">
-        <div className="daftartagihanlunas-logo">
-          <img src="https://img.icons8.com/ios-filled/100/ffffff/water.png" alt="Logo Air" />
+    <div className="global-layout">
+      <main className="global-main">
+        <div className="daftartagihan-card">
+          <div className="daftartagihan-card-header">
+            <h2 className="daftartagihan-title">Daftar Tagihan</h2>
+          </div>
+          <div className="daftartagihan-table-wrapper">
+            <table className="daftartagihan-table">
+              <thead>
+                <tr>
+                  <th style={{ textAlign: "center" }}>No</th>
+                  <th style={{ textAlign: "center" }}>Status</th>
+                  <th style={{ textAlign: "center" }}>Tagihan</th>
+                  <th style={{ textAlign: "center" }}>ID Pakai</th>
+                  <th style={{ textAlign: "center" }}>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tagihanLunas.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: "center" }}>Tidak ada data</td>
+                  </tr>
+                ) : (
+                  tagihanLunas.map((item, idx) => (
+                    <tr key={item.id_tagihan || idx}>
+                      <td style={{ textAlign: "center" }}>{idx + 1}</td>
+                      <td style={{ textAlign: "center" }}>{item.status}</td>
+                      <td style={{ textAlign: "center" }}>{item.tagihanLunas}</td>
+                      <td style={{ textAlign: "center" }}>{item.id_pakai}</td>
+                      <td>
+                        <button
+                          className="btn-edit"
+                          onClick={() => navigate(`/tagihanLunas/edit/${item.id_tagihan}`)}
+                          title="Edit"
+                        >
+                          <i className="bi bi-pencil-square"></i>
+                        </button>
+                        <button
+                          className="btn-delete"
+                          onClick={() => handleDeleteClick(item)}
+                          title="Hapus"
+                          style={{ marginLeft: 8 }}
+                        >
+                          <i className="bi bi-trash3-fill"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <nav>
-        <ul>
-          <li>
-            <Link to="/dashboard-admin" style={{ color: "inherit", textDecoration: "none" }}>
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link to="/pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
-              Pemakaian
-            </Link>
-          </li>
-          <li>
-            <Link to="/tagihan" style={{ color: "inherit", textDecoration: "none" }}>
-              Tagihan
-            </Link>
-          </li>
-          <li>
-            <Link to="/tagihan-lunas" style={{ color: "inherit", textDecoration: "none" }}>
-              Tagihan Lunas
-            </Link>
-          </li>
-          <li>
-            <Link to="/pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
-              Pelanggan
-            </Link>
-          </li>
-          <li>
-            <Link to="/layanan" style={{ color: "inherit", textDecoration: "none" }}>
-              Layanan
-            </Link>
-          </li>
-          <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>Keluar</li>
-        </ul>      
-        </nav>
-      </aside>
-      <main className="daftartagihanlunas-main">
-        {/* Konten utama Daftar Layanan di sini */}
-        <h2 className="daftartagihanlunas-title">Daftar Tagihan Lunas</h2>
-        {/* dst... */}
       </main>
-      {showLogoutModal && (
+      {/* Modal Logout */}
+      {/* Modal Hapus */}
+      {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-box">
             <div className="modal-icon">
@@ -69,11 +104,11 @@ const DaftarTagihanLunas = () => {
                 <text x="50%" y="54%" textAnchor="middle" fill="#ffb74d" fontSize="48px" fontWeight="bold" dy=".3em">!</text>
               </svg>
             </div>
-            <div className="modal-title">Keluar</div>
-            <div className="modal-text">Anda yakin ingin keluar?</div>
+            <div className="modal-title">Hapus Tagihan</div>
+            <div className="modal-text">Anda yakin ingin menghapus data ini?</div>
             <div className="modal-actions">
-              <button className="btn-logout" onClick={handleConfirmLogout}>Ya, Keluar</button>
-              <button className="btn-cancel" onClick={handleCloseModal}>Batal</button>
+              <button className="btn-logout" onClick={handleConfirmDelete}>Ya, Hapus</button>
+              <button className="btn-cancel" onClick={handleCloseDeleteModal}>Batal</button>
             </div>
           </div>
         </div>

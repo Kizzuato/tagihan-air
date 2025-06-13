@@ -11,7 +11,7 @@ const LihatTagihan = () => {
   const handleConfirmLogout = () => {
     // Proses logout, misal hapus token dan redirect
     // localStorage.removeItem("token");
-    navigate("/login");
+    navigate("");
   };
 
   return (

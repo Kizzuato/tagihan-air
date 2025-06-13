@@ -20,7 +20,7 @@ const DaftarPelanggan = () => {
   const handleLogoutClick = () => setShowLogoutModal(true);
   const handleCloseModal = () => setShowLogoutModal(false);
   const handleConfirmLogout = () => {
-    window.location.href = "/login";
+    window.location.href = "";
   };
 
   // Untuk modal hapus

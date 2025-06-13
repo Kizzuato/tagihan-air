@@ -32,7 +32,7 @@ export default function Registrasi() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-            navigate("/login");
+            navigate("");
         });    
       } else {
         setError(true);
@@ -86,7 +86,7 @@ export default function Registrasi() {
           Daftar
         </button>
         <p className="login-link">
-          Sudah punya akun? <Link to="/login">Login di sini</Link>
+          Sudah punya akun? <Link to="">Login di sini</Link>
         </p>
       </form>
     </div>

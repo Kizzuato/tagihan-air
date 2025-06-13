@@ -20,17 +20,20 @@ import LihatTagihan from "./components/LihatTagihan";
 import LihatPemakaian from "./components/LihatPemakaian";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminLayout from "./components/adminLayout.tsx";
+import EditTagihan from "./components/EditTagihan.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Login */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ResetPassword />} />
         {/* Registrasi */}
         <Route path="/user/register" element={<Registrasi />} />
         {/* Dashboard Admin */}
+        <Route element={<AdminLayout />}>
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />
         <Route path="/layanan" element={<DaftarLayanan />} />
         <Route path="/layanan/tambah" element={<AddLayanan />} />
@@ -38,11 +41,12 @@ function App() {
         <Route path="/pemakaian" element={<DaftarPemakaian />} />
         <Route path="/pemakaian/tambah" element={<AddPemakaian />} />
         <Route path="/tagihan" element={<DaftarTagihan />} />
+        <Route path="/tagihan/edit/:id_tagihan" element={<EditTagihan />} />
         <Route path="/tagihan-lunas" element={<DaftarTagihanLunas />} />
         <Route path="/pelanggan" element={<DaftarPelanggan />} />
         <Route path="/pelanggan/tambah" element={<AddPelanggan />} />
         <Route path="/pelanggan/edit/:id_pelanggan" element={<EditPelanggan />} />
-
+        </Route>
         {/* Dashboard Pelanggan */}
         <Route path="/dashboard-pelanggan" element={<DashboardPelanggan />} />
         <Route path="/lihat-tagihan" element={<LihatTagihan />} />
