@@ -19,8 +19,8 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await res.json();
-      console.log("DATA LOGIN:", data);
       if (res.ok) {
+        sessionStorage.setItem("user", JSON.stringify(data));
         if (data.level === "admin") {
           navigate("/dashboard-admin");
         } else if (data.level === "pelanggan") {

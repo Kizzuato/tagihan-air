@@ -21,6 +21,7 @@ import LihatPemakaian from "./components/LihatPemakaian";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminLayout from "./components/adminLayout.tsx";
+import CustLayout from "./components/custLayout.tsx";
 import EditTagihan from "./components/EditTagihan.jsx";
 
 function App() {
@@ -30,8 +31,10 @@ function App() {
         {/* Login */}
         <Route path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ResetPassword />} />
+        
         {/* Registrasi */}
         <Route path="/user/register" element={<Registrasi />} />
+
         {/* Dashboard Admin */}
         <Route element={<AdminLayout />}>
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />
@@ -47,10 +50,13 @@ function App() {
         <Route path="/pelanggan/tambah" element={<AddPelanggan />} />
         <Route path="/pelanggan/edit/:id_pelanggan" element={<EditPelanggan />} />
         </Route>
+
         {/* Dashboard Pelanggan */}
+        <Route element={<CustLayout />} >
         <Route path="/dashboard-pelanggan" element={<DashboardPelanggan />} />
         <Route path="/lihat-tagihan" element={<LihatTagihan />} />
         <Route path="/lihat-pemakaian" element={<LihatPemakaian />} />
+        </Route>
 
         {/* Redirect ke Login jika tidak ada route yang cocok */}
       </Routes>

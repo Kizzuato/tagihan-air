@@ -4,7 +4,7 @@ import "../css/adminLayout.css";
 import "../css/global.css"
 import { Outlet } from "react-router-dom";
 
-const AdminLayout = ({ children }) => {
+const CustLayout = ({ children }) => {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     const handleLogoutClick = () => setShowLogoutModal(true);
@@ -22,36 +22,23 @@ const AdminLayout = ({ children }) => {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/dashboard-admin" style={{ color: "inherit", textDecoration: "none" }}>
+                            <Link to="/dashboard-pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link to="/pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
-                                Pemakaian
+                            <Link to="/lihat-pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
+                                Lihat Pemakaian
                             </Link>
                         </li>
                         <li>
-                            <Link to="/tagihan" style={{ color: "inherit", textDecoration: "none" }}>
-                                Tagihan
+                            <Link to="/lihat-tagihan" style={{ color: "inherit", textDecoration: "none" }}>
+                                Lihat Tagihan
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/tagihan-lunas" style={{ color: "inherit", textDecoration: "none" }}>
-                                Tagihan Lunas
-                            </Link>
+                        <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>
+                            Keluar
                         </li>
-                        <li>
-                            <Link to="/pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
-                                Pelanggan
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/layanan" style={{ color: "inherit", textDecoration: "none" }}>
-                                Layanan
-                            </Link>
-                        </li>
-                        <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>Keluar</li>
                     </ul>
                 </nav>
             </aside>
@@ -80,4 +67,4 @@ const AdminLayout = ({ children }) => {
     )
 }
 
-export default AdminLayout;
+export default CustLayout;
