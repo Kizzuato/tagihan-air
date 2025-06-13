@@ -1,0 +1,171 @@
+.daftartagihanlunas-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.daftartagihanlunas-sidebar {
+  width: 220px;
+  background: #5ba4e6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+
+.daftartagihanlunas-logo img {
+  width: 90px;
+  margin-bottom: 32px;
+}
+
+.daftartagihanlunas-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.daftartagihanlunas-sidebar nav ul li {
+  padding: 14px 0 14px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.daftartagihanlunas-sidebar nav ul li:hover {
+  background: #4893d8;
+}
+
+.daftartagihanlunas-main {
+  flex: 1;
+  padding: 48px 40px;
+}
+
+.daftartagihanlunas-title {
+  color: #5ba4e6;
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.daftartagihanlunas-desc {
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.daftartagihanlunas-cards {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.daftartagihanlunas-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  padding: 28px 36px;
+  min-width: 320px;
+  max-width: 360px;
+  flex: 1;
+}
+
+.daftartagihanlunas-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.daftartagihanlunas-card-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.daftartagihanlunas-card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1976d2;
+}
+
+.daftartagihanlunas-card-content {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ...existing code... */
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 62, 80, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 32px 28px 32px;
+  min-width: 350px;
+  max-width: 95vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  text-align: center;
+  position: relative;
+}
+
+.modal-icon {
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.modal-text {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 28px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-logout {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background: #c62828;
+}
+
+.btn-cancel {
+  background: #ffc107;
+  color: #444;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #ffb300;
+}

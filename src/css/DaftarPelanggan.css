@@ -1,0 +1,263 @@
+.daftarlayanan-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.daftarlayanan-sidebar {
+  width: 220px;
+  background: #5ba4e6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+
+.daftarlayanan-logo img {
+  width: 90px;
+  margin-bottom: 32px;
+}
+
+.daftarlayanan-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.daftarlayanan-sidebar nav ul li {
+  padding: 14px 0 14px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.daftarlayanan-sidebar nav ul li:hover {
+  background: #4893d8;
+}
+
+.daftarlayanan-main {
+  flex: 1;
+  padding: 48px 40px;
+}
+
+.daftarlayanan-title {
+  color: #5ba4e6;
+  font-size: 2rem;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.daftarlayanan-desc {
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.daftarlayanan-cards {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.daftarlayanan-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  padding: 28px 36px;
+  min-width: 320px;
+  max-width: 100%;
+  margin-bottom: 24px;
+}
+
+.daftarlayanan-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.daftarlayanan-card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1976d2;
+}
+
+.btn-tambah-layanan {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-tambah-layanan:hover {
+  background: #217dbb;
+}
+
+.daftarlayanan-table-wrapper {
+  margin-top: 10px;
+}
+
+.daftarlayanan-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.06);
+}
+
+.daftarlayanan-table th {
+  background: #5ba6df;
+  color: #fff;
+  font-weight: 600;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.daftarlayanan-table td {
+  padding: 16px 0;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.daftarlayanan-table tr:last-child td {
+  border-bottom: none;
+  width: 100px;
+  min-width: 180px;
+  max-width: 260px;
+  justify-content: flex-end; /* kanan */
+
+}
+
+
+.btn-edit {
+    margin-right: 8px;
+
+}
+
+.btn-delete {
+  margin-right: 0px;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  background: #217dbb;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background: #217dbb;
+}
+
+.btn-delete {
+  background: #217dbb;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #217dbb;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 62, 80, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 32px 28px 32px;
+  min-width: 350px;
+  max-width: 95vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  text-align: center;
+  position: relative;
+}
+
+.modal-icon {
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.modal-text {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 28px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-logout {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background: #c62828;
+}
+
+.btn-cancel {
+  background: #ffc107;
+  color: #444;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #ffb300;
+}
+
+/* Tambahan untuk tombol sukses */
+.btn-logout.success {
+  background: #4caf50;
+}
+.btn-logout.success:hover {
+  background: #388e3c;
+}

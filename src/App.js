@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./components/Login";
+import ResetPassword from "./components/ResetPassword";
+import Registrasi from "./components/Registrasi";
+import DashboardAdmin from "./components/DashboardAdmin";
+import DaftarLayanan from "./components/DaftarLayanan";
+import DaftarPemakaian from "./components/DaftarPemakaian";
+import DaftarTagihan from "./components/DaftarTagihan";
+import DaftarTagihanLunas from "./components/DaftarTagihanLunas";
+import DaftarPelanggan from "./components/DaftarPelanggan";
+import AddLayanan from "./components/AddLayanan";
+import EditLayanan from "./components/EditLayanan";
+import AddPelanggan from "./components/AddPelanggan";
+import EditPelanggan from "./components/EditPelanggan";
+import AddPemakaian from "./components/AddPemakaian";
+
+
+
+import DashboardPelanggan from "./components/DashboardPelanggan";
+import LihatTagihan from "./components/LihatTagihan";
+import LihatPemakaian from "./components/LihatPemakaian";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Login */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ResetPassword />} />
+        {/* Registrasi */}
+        <Route path="/user/register" element={<Registrasi />} />
+        {/* Dashboard Admin */}
+        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+        <Route path="/layanan" element={<DaftarLayanan />} />
+        <Route path="/layanan/tambah" element={<AddLayanan />} />
+        <Route path="/layanan/edit/:id_layanan" element={<EditLayanan />} />
+        <Route path="/pemakaian" element={<DaftarPemakaian />} />
+        <Route path="/pemakaian/tambah" element={<AddPemakaian />} />
+        <Route path="/tagihan" element={<DaftarTagihan />} />
+        <Route path="/tagihan-lunas" element={<DaftarTagihanLunas />} />
+        <Route path="/pelanggan" element={<DaftarPelanggan />} />
+        <Route path="/pelanggan/tambah" element={<AddPelanggan />} />
+        <Route path="/pelanggan/edit/:id_pelanggan" element={<EditPelanggan />} />
+
+        {/* Dashboard Pelanggan */}
+        <Route path="/dashboard-pelanggan" element={<DashboardPelanggan />} />
+        <Route path="/lihat-tagihan" element={<LihatTagihan />} />
+        <Route path="/lihat-pemakaian" element={<LihatPemakaian />} />
+
+        {/* Redirect ke Login jika tidak ada route yang cocok */}
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;

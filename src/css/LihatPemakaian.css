@@ -1,0 +1,170 @@
+.lihatpemakaian-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.lihatpemakaian-sidebar {
+  width: 220px;
+  background: #5ba4e6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+
+.lihatpemakaian-logo img {
+  width: 80px;
+  margin-bottom: 32px;
+}
+
+.lihatpemakaian-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.lihatpemakaian-sidebar nav ul li {
+  padding: 14px 0 14px 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lihatpemakaian-sidebar nav ul li:hover {
+  background: #4893d8;
+}
+
+.lihatpemakaian-main {
+  flex: 1;
+  padding: 48px 40px;
+}
+
+.lihatpemakaian-title {
+  color: #5ba4e6;
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.lihatpemakaian-desc {
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.lihatpemakaian-cards {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.lihatpemakaian-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  padding: 28px 36px;
+  min-width: 280px;
+  max-width: 340px;
+  flex: 1;
+}
+
+.lihatpemakaian-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.lihatpemakaian-card-icon {
+  font-size: 2rem;
+  margin-right: 12px;
+}
+
+.lihatpemakaian-card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1976d2;
+}
+
+.lihatpemakaian-card-content {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 62, 80, 0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal box */
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 32px 32px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.15);
+  position: relative;
+}
+
+.modal-icon {
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.modal-text {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 28px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+
+.btn-logout {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background: #c62828;
+}
+
+.btn-cancel {
+  background: #ffc107;
+  color: #444;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #ffb300;
+}
