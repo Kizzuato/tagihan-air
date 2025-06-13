@@ -23,6 +23,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminLayout from "./components/adminLayout.tsx";
 import CustLayout from "./components/custLayout.tsx";
 import EditTagihan from "./components/EditTagihan.jsx";
+import InvoiceTagihan from "./components/invoice.jsx";
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
         <Route path="/lihat-tagihan" element={<LihatTagihan />} />
         <Route path="/lihat-pemakaian" element={<LihatPemakaian />} />
         </Route>
+
+        <Route path="tagihan-lunas/invoice/:id_tagihan" element={<InvoiceTagihan />} />
 
         {/* Redirect ke Login jika tidak ada route yang cocok */}
       </Routes>

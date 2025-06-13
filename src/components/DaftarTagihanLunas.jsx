@@ -23,7 +23,7 @@ const DaftarTagihanLunas = () => {
     setSelectedTagihan(item);
     setShowDeleteModal(true);
   };
-
+  
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
     setSelectedTagihan(null);
@@ -75,23 +75,15 @@ const DaftarTagihanLunas = () => {
                       <td style={{ textAlign: "center" }}>{item.status}</td>
                       <td style={{ textAlign: "center" }}>{item.tagihan}</td>
                       <td style={{ textAlign: "center" }}>{item.id_pakai}</td>
-                      <td>
+                      <td style={{ textAlign: "center" }}>
                         <button
                           className="btn-edit"
                           onClick={() =>
-                            navigate(`/tagihan/edit/${item.id_tagihan}`)
+                            navigate(`/tagihan-lunas/invoice/${item.id_tagihan}`)
                           }
-                          title="Edit"
+                          title="Invoice"
                         >
                           <i className="bi bi-pencil-square"></i>
-                        </button>
-                        <button
-                          className="btn-delete"
-                          onClick={() => handleDeleteClick(item)}
-                          title="Hapus"
-                          style={{ marginLeft: 8 }}
-                        >
-                          <i className="bi bi-trash3-fill"></i>
                         </button>
                       </td>
                     </tr>
