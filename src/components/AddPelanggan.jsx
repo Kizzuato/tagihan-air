@@ -72,7 +72,7 @@ const AddPelanggan = () => {
         textAlign: "center",
         color: "#5ba4e6",
         fontWeight: "bold",
-        marginTop: "32px",
+        paddingTop: "32px",
         marginBottom: "24px"
       }}>
         Tambah Pelanggan

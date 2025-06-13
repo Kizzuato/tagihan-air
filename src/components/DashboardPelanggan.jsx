@@ -12,7 +12,7 @@ const DashboardPelanggan = () => {
   const handleConfirmLogout = () => {
     // Proses logout, misal hapus token dan redirect
     // localStorage.removeItem("token");
-    navigate("");
+    navigate("/login");
   };
 
   return (

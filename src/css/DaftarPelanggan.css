@@ -4,41 +4,6 @@
   background: #f5f6fa;
 }
 
-.daftarlayanan-sidebar {
-  width: 220px;
-  background: #5ba4e6;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 32px;
-}
-
-.daftarlayanan-logo img {
-  width: 90px;
-  margin-bottom: 32px;
-}
-
-.daftarlayanan-sidebar nav ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-
-.daftarlayanan-sidebar nav ul li {
-  padding: 14px 0 14px 32px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.daftarlayanan-sidebar nav ul li:hover {
-  background: #4893d8;
-}
-
 .daftarlayanan-main {
   flex: 1;
   padding: 48px 40px;

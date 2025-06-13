@@ -1,3 +1,14 @@
+.daftarpemakaian-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.daftarpemakaian-main {
+  flex: 1;
+  padding: 48px 40px;
+}
+
 .daftarpemakaian-title {
   color: #5ba4e6;
   font-size: 2rem;
@@ -14,16 +25,17 @@
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .daftarpemakaian-card {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
-  padding: 28px;
-  margin: 24px;
-  width: 85%;
+  padding: 28px 36px;
+  min-width: 320px;
+  max-width: 100%;
+  margin-bottom: 24px;
+  width: 80%;
 }
 
 .daftarpemakaian-card-header {
@@ -31,7 +43,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
-  width: 100%;
 }
 
 .daftarpemakaian-card-title {
@@ -58,8 +69,7 @@
 
 .daftarpemakaian-table-wrapper {
   margin-top: 10px;
-  width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .daftarpemakaian-table {
@@ -70,7 +80,6 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(25, 118, 210, 0.06);
-  width: 100%;
 }
 
 .daftarpemakaian-table th {

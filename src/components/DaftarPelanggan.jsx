@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../css/DaftarPelanggan.css";
+import "../css/global.css";
 
 const DaftarPelanggan = () => {
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [pelanggan, setPelanggan] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedPelanggan, setSelectedPelanggan] = useState(null);
@@ -16,13 +16,6 @@ const DaftarPelanggan = () => {
       .then((data) => setPelanggan(data))
       .catch(() => setPelanggan([]));
   }, []);
-
-  const handleLogoutClick = () => setShowLogoutModal(true);
-  const handleCloseModal = () => setShowLogoutModal(false);
-  const handleConfirmLogout = () => {
-    window.location.href = "";
-  };
-
   // Untuk modal hapus
   const handleDeleteClick = (item) => {
     setSelectedPelanggan(item);
@@ -48,48 +41,8 @@ const DaftarPelanggan = () => {
   };
 
   return (
-    <div className="daftarpelanggan-layout">
-      <aside className="daftarpelanggan-sidebar">
-        <div className="daftarpelanggan-logo">
-          <img src="https://img.icons8.com/ios-filled/100/ffffff/water.png" alt="Logo Air" />
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/dashboard-admin" style={{ color: "inherit", textDecoration: "none" }}>
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
-                Pemakaian
-              </Link>
-            </li>
-            <li>
-              <Link to="/tagihan" style={{ color: "inherit", textDecoration: "none" }}>
-                Tagihan
-              </Link>
-            </li>
-            <li>
-              <Link to="/tagihan-lunas" style={{ color: "inherit", textDecoration: "none" }}>
-                Tagihan Lunas
-              </Link>
-            </li>
-            <li>
-              <Link to="/pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
-                Pelanggan
-              </Link>
-            </li>
-            <li>
-              <Link to="/layanan" style={{ color: "inherit", textDecoration: "none" }}>
-                Layanan
-              </Link>
-            </li>
-            <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>Keluar</li>
-          </ul>
-        </nav>
-      </aside>
-      <main className="daftarpelanggan-main">
+    <div className="global-layout">
+      <main className="global-main">
         <div className="daftarpelanggan-card">
           <div className="daftarpelanggan-card-header">
             <h2 className="daftarpelanggan-title">Daftar Pelanggan</h2>
@@ -147,25 +100,6 @@ const DaftarPelanggan = () => {
           </div>
         </div>
       </main>
-      {/* Modal Logout */}
-      {showLogoutModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <div className="modal-icon">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#ffb74d" strokeWidth="4"/>
-                <text x="50%" y="54%" textAnchor="middle" fill="#ffb74d" fontSize="48px" fontWeight="bold" dy=".3em">!</text>
-              </svg>
-            </div>
-            <div className="modal-title">Keluar</div>
-            <div className="modal-text">Anda yakin ingin keluar?</div>
-            <div className="modal-actions">
-              <button className="btn-logout" onClick={handleConfirmLogout}>Ya, Keluar</button>
-              <button className="btn-cancel" onClick={handleCloseModal}>Batal</button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Modal Hapus */}
       {showDeleteModal && (
         <div className="modal-overlay">

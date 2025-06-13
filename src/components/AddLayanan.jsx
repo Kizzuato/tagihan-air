@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/DaftarLayanan.css";
+import "../css/global.css"
 
 const AddLayanan = () => {
   const [namaLayanan, setNamaLayanan] = useState("");
@@ -46,8 +47,8 @@ const AddLayanan = () => {
         textAlign: "center",
         color: "#5ba4e6",
         fontWeight: "bold",
-        marginTop: "32px",
-        marginBottom: "24px"
+        marginBottom: "24px",
+        paddingTop: "20px"
       }}>
         Tambah Layanan
       </h2>

@@ -1,18 +1,22 @@
-import  { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/DaftarTagihanLunas.css";
-import "../css/global.css"
+import "../css/global.css";
 
 const DaftarTagihanLunas = () => {
-  const [tagihanLunas, setTagihanLunas] = useState([]);
+  const [tagihan, setTagihanLunas] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTagihan, setSelectedTagihan] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/tagihanLunas")
+    fetch("http://localhost:5000/tagihan")
       .then((res) => res.json())
-      .then((data) => setTagihanLunas(Array.isArray(data) ? data : []))
+      .then((data) => {
+        setTagihanLunas(
+          data.filter((item) => item.status?.toLowerCase() !== "belum bayar")
+        );
+      })
       .catch(() => setTagihanLunas([]));
   }, []);
   const handleDeleteClick = (item) => {
@@ -26,16 +30,17 @@ const DaftarTagihanLunas = () => {
   };
 
   const handleConfirmDelete = () => {
-    fetch(`http://localhost:5000/tagihanLunas/${selectedTagihan.id_tagihan}`, {
+    fetch(`http://localhost:5000/tagihan/${selectedTagihan.id_tagihan}`, {
       method: "DELETE",
-    })
-      .then((res) => {
-        if (res.ok) {
-          setTagihanLunas(tagihanLunas.filter(t => t.id_tagihan !== selectedTagihan.id_tagihan));
-        }
-        setShowDeleteModal(false);
-        setSelectedTagihan(null);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        setTagihanLunas(
+          tagihan.filter((t) => t.id_tagihan !== selectedTagihan.id_tagihan)
+        );
+      }
+      setShowDeleteModal(false);
+      setSelectedTagihan(null);
+    });
   };
 
   return (
@@ -43,7 +48,7 @@ const DaftarTagihanLunas = () => {
       <main className="global-main">
         <div className="daftartagihan-card">
           <div className="daftartagihan-card-header">
-            <h2 className="daftartagihan-title">Daftar Tagihan</h2>
+            <h2 className="daftartagihan-title">Daftar Tagihan Lunas</h2>
           </div>
           <div className="daftartagihan-table-wrapper">
             <table className="daftartagihan-table">
@@ -57,21 +62,25 @@ const DaftarTagihanLunas = () => {
                 </tr>
               </thead>
               <tbody>
-                {tagihanLunas.length === 0 ? (
+                {tagihan.length === 0 ? (
                   <tr>
-                    <td colSpan="5" style={{ textAlign: "center" }}>Tidak ada data</td>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      Tidak ada data
+                    </td>
                   </tr>
                 ) : (
-                  tagihanLunas.map((item, idx) => (
+                  tagihan.map((item, idx) => (
                     <tr key={item.id_tagihan || idx}>
                       <td style={{ textAlign: "center" }}>{idx + 1}</td>
                       <td style={{ textAlign: "center" }}>{item.status}</td>
-                      <td style={{ textAlign: "center" }}>{item.tagihanLunas}</td>
+                      <td style={{ textAlign: "center" }}>{item.tagihan}</td>
                       <td style={{ textAlign: "center" }}>{item.id_pakai}</td>
                       <td>
                         <button
                           className="btn-edit"
-                          onClick={() => navigate(`/tagihanLunas/edit/${item.id_tagihan}`)}
+                          onClick={() =>
+                            navigate(`/tagihan/edit/${item.id_tagihan}`)
+                          }
                           title="Edit"
                         >
                           <i className="bi bi-pencil-square"></i>
@@ -100,15 +109,38 @@ const DaftarTagihanLunas = () => {
           <div className="modal-box">
             <div className="modal-icon">
               <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#ffb74d" strokeWidth="4"/>
-                <text x="50%" y="54%" textAnchor="middle" fill="#ffb74d" fontSize="48px" fontWeight="bold" dy=".3em">!</text>
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  fill="none"
+                  stroke="#ffb74d"
+                  strokeWidth="4"
+                />
+                <text
+                  x="50%"
+                  y="54%"
+                  textAnchor="middle"
+                  fill="#ffb74d"
+                  fontSize="48px"
+                  fontWeight="bold"
+                  dy=".3em"
+                >
+                  !
+                </text>
               </svg>
             </div>
             <div className="modal-title">Hapus Tagihan</div>
-            <div className="modal-text">Anda yakin ingin menghapus data ini?</div>
+            <div className="modal-text">
+              Anda yakin ingin menghapus data ini?
+            </div>
             <div className="modal-actions">
-              <button className="btn-logout" onClick={handleConfirmDelete}>Ya, Hapus</button>
-              <button className="btn-cancel" onClick={handleCloseDeleteModal}>Batal</button>
+              <button className="btn-logout" onClick={handleConfirmDelete}>
+                Ya, Hapus
+              </button>
+              <button className="btn-cancel" onClick={handleCloseDeleteModal}>
+                Batal
+              </button>
             </div>
           </div>
         </div>

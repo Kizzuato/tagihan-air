@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../css/DaftarLayanan.css";
+import "../css/global.css"
 
 const DaftarLayanan = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -49,48 +50,8 @@ const DaftarLayanan = () => {
   };
 
   return (
-    <div className="daftarlayanan-layout">
-      <aside className="daftarlayanan-sidebar">
-        <div className="daftarlayanan-logo">
-          <img src="https://img.icons8.com/ios-filled/100/ffffff/water.png" alt="Logo Air" />
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/dashboard-admin" style={{ color: "inherit", textDecoration: "none" }}>
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
-                Pemakaian
-              </Link>
-            </li>
-            <li>
-              <Link to="/tagihan" style={{ color: "inherit", textDecoration: "none" }}>
-                Tagihan
-              </Link>
-            </li>
-            <li>
-              <Link to="/tagihan-lunas" style={{ color: "inherit", textDecoration: "none" }}>
-                Tagihan Lunas
-              </Link>
-            </li>
-            <li>
-              <Link to="/pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
-                Pelanggan
-              </Link>
-            </li>
-            <li>
-              <Link to="/layanan" style={{ color: "inherit", textDecoration: "none" }}>
-                Layanan
-              </Link>
-            </li>
-            <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>Keluar</li>
-          </ul>
-        </nav>
-      </aside>
-      <main className="daftarlayanan-main">
+    <div className="global-layout">
+      <main className="global-main">
         <div className="daftarlayanan-card">
           <div className="daftarlayanan-card-header">
             <h2 className="daftarlayanan-title">Daftar Layanan</h2>
@@ -144,25 +105,6 @@ const DaftarLayanan = () => {
           </div>
         </div>
       </main>
-      {/* Modal Logout */}
-      {showLogoutModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <div className="modal-icon">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#ffb74d" strokeWidth="4"/>
-                <text x="50%" y="54%" textAnchor="middle" fill="#ffb74d" fontSize="48px" fontWeight="bold" dy=".3em">!</text>
-              </svg>
-            </div>
-            <div className="modal-title">Keluar</div>
-            <div className="modal-text">Anda yakin ingin keluar?</div>
-            <div className="modal-actions">
-              <button className="btn-logout" onClick={handleConfirmLogout}>Ya, Keluar</button>
-              <button className="btn-cancel" onClick={handleCloseModal}>Batal</button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Modal Hapus */}
       {showDeleteModal && (
         <div className="modal-overlay">
