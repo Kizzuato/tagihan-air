@@ -1,71 +1,68 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../css/LihatPemakaian.css";
+import "../css/global.css";
 
 const LihatPemakaian = () => {
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [pemakaian, setPemakaian] = useState([]);
   const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
-  const handleLogoutClick = () => setShowLogoutModal(true);
-  const handleCloseModal = () => setShowLogoutModal(false);
-  const handleConfirmLogout = () => {
-    // Proses logout, misal hapus token dan redirect
-    // localStorage.removeItem("token");
-    navigate("");
-  };
-
+  useEffect(() => {
+    fetch("http://localhost:5000/pakai")
+      .then((res) => res.json())
+      .then((data) => {
+        const pemake = data.filter((item) => item.id_pelanggan === user.id);
+        console.log(user);
+        console.log(pemake);
+        setPemakaian(pemake);
+      })
+      .catch(() => setPemakaian([]));
+  }, []);
+  
   return (
-    <div className="lihatpemakaian-layout">
-      <aside className="lihatpemakaian-sidebar">
-        <div className="lihatpemakaian-logo">
-          <img src="https://img.icons8.com/ios-filled/100/ffffff/water.png" alt="Logo Air" />
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/dashboard-pelanggan" style={{ color: "inherit", textDecoration: "none" }}>
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/lihat-pemakaian" style={{ color: "inherit", textDecoration: "none" }}>
-                Lihat Pemakaian
-              </Link>
-            </li>
-            <li>
-              <Link to="/lihat-tagihan" style={{ color: "inherit", textDecoration: "none" }}>
-                Lihat Tagihan
-              </Link>
-            </li>
-            <li style={{ cursor: "pointer" }} onClick={handleLogoutClick}>
-              Keluar
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      <main className="lihatpemakaian-main">
-        {/* Konten utama Daftar Layanan di sini */}
-        <h2 className="lihatpemakaian-title">Daftar Pemakaian Anda</h2>
-        {/* dst... */}
-      </main>
-      {showLogoutModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <div className="modal-icon">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#ffb74d" strokeWidth="4"/>
-                <text x="50%" y="54%" textAnchor="middle" fill="#ffb74d" fontSize="48px" fontWeight="bold" dy=".3em">!</text>
-              </svg>
-            </div>
-            <div className="modal-title">Keluar</div>
-            <div className="modal-text">Anda yakin ingin keluar?</div>
-            <div className="modal-actions">
-              <button className="btn-logout" onClick={handleConfirmLogout}>Ya, Keluar</button>
-              <button className="btn-cancel" onClick={handleCloseModal}>Batal</button>
-            </div>
+    <div className="global-layout">
+      <main className="global-main">
+        <div className="lihatpemakaian-card">
+          <div className="lihatpemakaian-card-header">
+            <h2 className="lihatpemakaian-title">Daftar Pemakaian Anda</h2>
+          </div>
+          <div className="lihatpemakaian-table-wrapper">
+            <table className="lihatpemakaian-table">
+              <thead>
+                <tr>
+                  <th style={{ textAlign: "center" }}>No</th>
+                  <th style={{ textAlign: "center" }}>Pelanggan</th>
+                  <th style={{ textAlign: "center" }}>Bulan</th>
+                  <th style={{ textAlign: "center" }}>Tahun</th>
+                  <th style={{ textAlign: "center" }}>Meter³ Awal</th>
+                  <th style={{ textAlign: "center" }}>Meter³ Akhir</th>
+                  {/* <th style={{ textAlign: "center" }}>Aksi</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {pemakaian.length === 0 ? (
+                  <tr>
+                    <td colSpan="7" style={{ textAlign: "center" }}>Tidak ada data</td>
+                  </tr>
+                ) : (
+                  pemakaian.map((item, idx) => (
+                    <tr key={item.id_pakai || idx}>
+                      <td style={{ textAlign: "center" }}>{idx + 1}</td>
+                      <td style={{ textAlign: "center" }}>{item.pelanggan?.nama_pelanggan || "-"}</td>
+                      <td style={{ textAlign: "center" }}>{item.bulan?.nama_bulan || "-"}</td>
+                      <td style={{ textAlign: "center" }}>{item.tahun}</td>
+                      <td style={{ textAlign: "center" }}>{item.awal}</td>
+                      <td style={{ textAlign: "center" }}>{item.akhir}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
-      )}
+      </main>
     </div>
   );
 };

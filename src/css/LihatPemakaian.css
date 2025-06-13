@@ -15,7 +15,7 @@
 }
 
 .lihatpemakaian-logo img {
-  width: 80px;
+  width: 90px;
   margin-bottom: 32px;
 }
 
@@ -30,6 +30,9 @@
   font-size: 1.1rem;
   cursor: pointer;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .lihatpemakaian-sidebar nav ul li:hover {
@@ -45,6 +48,7 @@
   color: #5ba4e6;
   font-size: 2rem;
   margin-bottom: 4px;
+  font-weight: bold;
 }
 
 .lihatpemakaian-desc {
@@ -63,20 +67,17 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   padding: 28px 36px;
-  min-width: 280px;
-  max-width: 340px;
-  flex: 1;
+  min-width: 320px;
+  max-width: 100%;
+  margin-bottom: 24px;
+  width: 95%;
 }
 
 .lihatpemakaian-card-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
-}
-
-.lihatpemakaian-card-icon {
-  font-size: 2rem;
-  margin-right: 12px;
 }
 
 .lihatpemakaian-card-title {
@@ -85,55 +86,141 @@
   color: #1976d2;
 }
 
-.lihatpemakaian-card-content {
-  color: #333;
+.btn-tambah-tagihan {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 22px;
   font-size: 1rem;
-  line-height: 1.7;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* Modal overlay */
+.btn-tambah-tagihan:hover {
+  background: #217dbb;
+}
+
+.lihatpemakaian-table-wrapper {
+  margin-top: 10px;
+  overflow-x: scroll;
+}
+
+.lihatpemakaian-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.06);
+}
+
+.lihatpemakaian-table th {
+  background: #5ba6df;
+  color: #fff;
+  font-weight: 600;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.lihatpemakaian-table td {
+  padding: 16px 0;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.lihatpemakaian-table tr:last-child td {
+  border-bottom: none;
+  width: 100px;
+  min-width: 180px;
+  max-width: 260px;
+  justify-content: flex-end; /* kanan */
+
+}
+
+
+.btn-edit {
+    margin-right: 8px;
+
+}
+
+.btn-delete {
+  margin-right: 0px;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  background: #217dbb;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background: #217dbb;
+}
+
+.btn-delete {
+  background: #217dbb;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #217dbb;
+}
+
+/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(44, 62, 80, 0.7);
+  background: rgba(44, 62, 80, 0.6);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Modal box */
 .modal-box {
   background: #fff;
   border-radius: 12px;
-  padding: 40px 32px 32px 32px;
-  max-width: 420px;
-  width: 100%;
+  padding: 36px 32px 28px 32px;
+  min-width: 350px;
+  max-width: 95vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
   text-align: center;
-  box-shadow: 0 8px 32px rgba(44,62,80,0.15);
   position: relative;
 }
 
 .modal-icon {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .modal-title {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #444;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .modal-text {
-  font-size: 1.2rem;
   color: #666;
+  font-size: 1.1rem;
   margin-bottom: 28px;
 }
 
 .modal-actions {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   justify-content: center;
 }
 
@@ -141,9 +228,9 @@
   background: #e53935;
   color: #fff;
   border: none;
-  padding: 12px 32px;
-  border-radius: 7px;
-  font-size: 1.1rem;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
@@ -157,9 +244,9 @@
   background: #ffc107;
   color: #444;
   border: none;
-  padding: 12px 32px;
-  border-radius: 7px;
-  font-size: 1.1rem;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
@@ -167,4 +254,12 @@
 
 .btn-cancel:hover {
   background: #ffb300;
+}
+
+/* Tambahan untuk tombol sukses */
+.btn-logout.success {
+  background: #4caf50;
+}
+.btn-logout.success:hover {
+  background: #388e3c;
 }
