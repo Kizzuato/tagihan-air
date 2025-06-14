@@ -12,7 +12,11 @@ const DaftarTagihan = () => {
   useEffect(() => {
     fetch("http://localhost:5000/tagihan")
       .then((res) => res.json())
-      .then((data) => setTagihan(Array.isArray(data) ? data : []))
+      .then((data) => {
+        setTagihan(
+          data.filter((item) => item.status?.toLowerCase() === "belum bayar")
+        );
+      })
       .catch(() => setTagihan([]));
   }, []);
   const handleDeleteClick = (item) => {
