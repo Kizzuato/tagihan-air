@@ -79,7 +79,7 @@ const DaftarTagihanLunas = () => {
                         <button
                           className="btn-edit"
                           onClick={() =>
-                            navigate(`/tagihan-lunas/invoice/${item.id_tagihan}`)
+                            navigate(`/invoice/${item.id_tagihan}`)
                           }
                           title="Invoice"
                         >

@@ -59,7 +59,7 @@ function App() {
         <Route path="/lihat-pemakaian" element={<LihatPemakaian />} />
         </Route>
 
-        <Route path="tagihan-lunas/invoice/:id_tagihan" element={<InvoiceTagihan />} />
+        <Route path="/invoice/:id_tagihan" element={<InvoiceTagihan />} />
 
         {/* Redirect ke Login jika tidak ada route yang cocok */}
       </Routes>

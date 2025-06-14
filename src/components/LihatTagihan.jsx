@@ -5,7 +5,7 @@ import "../css/global.css"
 
 const LihatTagihan = () => {
   const [tagihan, setTagihan] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:5000/tagihan")
       .then((res) => res.json())
@@ -28,7 +28,7 @@ const LihatTagihan = () => {
                   <th style={{ textAlign: "center" }}>Status</th>
                   <th style={{ textAlign: "center" }}>Tagihan</th>
                   <th style={{ textAlign: "center" }}>ID Pakai</th>
-                  {/* <th style={{ textAlign: "center" }}>Aksi</th> */}
+                  <th style={{ textAlign: "center" }}>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,23 +43,23 @@ const LihatTagihan = () => {
                       <td style={{ textAlign: "center" }}>{item.status}</td>
                       <td style={{ textAlign: "center" }}>{item.tagihan}</td>
                       <td style={{ textAlign: "center" }}>{item.id_pakai}</td>
-                      {/* <td>
+                      <td style={{ textAlign: "center" }}>
                         <button
                           className="btn-edit"
-                          onClick={() => navigate(`/tagihan/edit/${item.id_tagihan}`)}
-                          title="Edit"
+                          onClick={() => navigate(`/invoice/${item.id_tagihan}`)}
+                          title="Invoice"
                         >
                           <i className="bi bi-pencil-square"></i>
                         </button>
-                        <button
+                        {/* <button
                           className="btn-delete"
                           onClick={() => handleDeleteClick(item)}
                           title="Hapus"
                           style={{ marginLeft: 8 }}
                         >
                           <i className="bi bi-trash3-fill"></i>
-                        </button>
-                      </td> */}
+                        </button> */}
+                      </td>
                     </tr>
                   ))
                 )}
