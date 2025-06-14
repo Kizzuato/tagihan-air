@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditTagihan = () => {
   const [tagihan, setTagihan] = useState("");
-  const [alamat, setAlamat] = useState("");
   const [id_pakai, setId_pakai] = useState("");
-  const [userId, setUserId] = useState("");
   const [status, setStatus] = useState("");
-  const [layananId, setLayananId] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
   const { id_tagihan } = useParams();
 
   useEffect(() => {
+    const getTagihanById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/tagihan/${id_tagihan}`
+        );
+        setTagihan(response.data.tagihan);
+        setId_pakai(response.data.id_pakai);
+        setStatus(response.data.status);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getTagihanById();
-  }, []);
+  }, [id_tagihan]);
 
-  const getTagihanById = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/tagihan/${id_tagihan}`
-      );
-      setTagihan(response.data.tagihan);
-      setId_pakai(response.data.id_pakai);
-      setStatus(response.data.status);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   async function updatePelanggan(e) {
     e.preventDefault();

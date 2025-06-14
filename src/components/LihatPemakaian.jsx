@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../css/LihatPemakaian.css";
 import "../css/global.css";
 
 const LihatPemakaian = () => {
   const [pemakaian, setPemakaian] = useState([]);
-  const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
@@ -14,12 +12,10 @@ const LihatPemakaian = () => {
       .then((res) => res.json())
       .then((data) => {
         const pemake = data.filter((item) => item.id_pelanggan === user.id);
-        console.log(user);
-        console.log(pemake);
         setPemakaian(pemake);
       })
       .catch(() => setPemakaian([]));
-  }, []);
+  }, [user.id]);
   
   return (
     <div className="global-layout">

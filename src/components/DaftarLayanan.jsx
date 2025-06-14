@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../css/DaftarLayanan.css";
 import "../css/global.css"
 
 const DaftarLayanan = () => {
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [layanan, setLayanan] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedLayanan, setSelectedLayanan] = useState(null);
@@ -18,12 +16,6 @@ const DaftarLayanan = () => {
       .then((data) => setLayanan(data))
       .catch(() => setLayanan([]));
   }, []);
-
-  const handleLogoutClick = () => setShowLogoutModal(true);
-  const handleCloseModal = () => setShowLogoutModal(false);
-  const handleConfirmLogout = () => {
-    window.location.href = "";
-  };
 
   // Untuk modal hapus
   const handleDeleteClick = (item) => {

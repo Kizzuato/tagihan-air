@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../css/DashboardPelanggan.css";
 import "../css/global.css";
 
@@ -7,7 +6,6 @@ const DashboardPelanggan = () => {
   const [pelanggan, setPelanggan] = useState([]);
   const [tagihanBelumDibayar, setTagihanBelumDibayar] = useState([]);
   const [tagihanSudahDibayar, setTagihanSudahDibayar] = useState([]);
-  const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
@@ -15,8 +13,6 @@ const DashboardPelanggan = () => {
       .then((res) => res.json())
       .then((data) => {
         const akun = data.filter((item) => item.id_user === user.id);
-        console.log(user);
-        console.log(akun);
         setPelanggan(akun);
       })
       .catch(() => setPelanggan([]));
@@ -39,7 +35,7 @@ const DashboardPelanggan = () => {
         setTagihanBelumDibayar([]);
         setTagihanSudahDibayar([]);
       });
-  }, []);
+  }, [user]);
   return (
     <div className="global-layout">
       <main className="global-main">
