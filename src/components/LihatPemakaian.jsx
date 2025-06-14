@@ -5,17 +5,17 @@ import "../css/global.css";
 
 const LihatPemakaian = () => {
   const [pemakaian, setPemakaian] = useState([]);
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const pelanggan = JSON.parse(sessionStorage.getItem("pelanggan"));
 
   useEffect(() => {
     fetch("http://localhost:5000/pakai")
       .then((res) => res.json())
       .then((data) => {
-        const pemake = data.filter((item) => item.id_pelanggan === user.id);
+        const pemake = data.filter((item) => item.id_pelanggan === pelanggan.id_pelanggan);
         setPemakaian(pemake);
       })
       .catch(() => setPemakaian([]));
-  }, [user.id]);
+  }, [pelanggan.id_pelanggan]);
   
   return (
     <div className="global-layout">

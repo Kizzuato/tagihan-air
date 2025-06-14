@@ -9,33 +9,39 @@ const DashboardPelanggan = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
-    fetch("http://localhost:5000/pelanggan")
-      .then((res) => res.json())
-      .then((data) => {
-        const akun = data.filter((item) => item.id_user === user.id);
-        setPelanggan(akun);
-      })
-      .catch(() => setPelanggan([]));
+  if (!user?.id) return;
 
-    fetch("http://localhost:5000/tagihan")
-      .then((res) => res.json())
-      .then((data) => {
-        const lunas = data.filter(
-          (item) => item.status?.toLowerCase() !== "belum bayar"
-        );
+  Promise.all([
+    fetch("http://localhost:5000/pelanggan").then((res) => res.json()),
+    fetch("http://localhost:5000/tagihan").then((res) => res.json()),
+  ])
+    .then(([pelangganData, tagihanData]) => {
+      const akun = pelangganData.filter((item) => item.id_user === user.id);
+      setPelanggan(akun);
+      sessionStorage.setItem("pelanggan", JSON.stringify(akun[0]));
 
-        const belumLunas = data.filter(
-          (item) => item.status?.toLowerCase() === "belum bayar"
-        );
+      const tagihan = tagihanData.filter(
+        (item) => item.pakai?.id_pelanggan === akun[0].id_pelanggan
+      );
 
-        setTagihanBelumDibayar(lunas);
-        setTagihanSudahDibayar(belumLunas);
-      })
-      .catch(() => {
-        setTagihanBelumDibayar([]);
-        setTagihanSudahDibayar([]);
-      });
-  }, [user]);
+      const lunas = tagihan.filter(
+        (item) => item.status?.toLowerCase() === "sudah bayar"
+      );
+
+      const belumLunas = tagihan.filter(
+        (item) => item.status?.toLowerCase() === "belum bayar"
+      );
+
+      setTagihanBelumDibayar(belumLunas);
+      setTagihanSudahDibayar(lunas);
+    })
+    .catch(() => {
+      setPelanggan([]);
+      setTagihanBelumDibayar([]);
+      setTagihanSudahDibayar([]);
+    });
+}, []);
+
   return (
     <div className="global-layout">
       <main className="global-main">
