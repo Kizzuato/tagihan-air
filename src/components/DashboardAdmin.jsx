@@ -32,15 +32,15 @@ const DashboardAdmin = () => {
       .then((res) => res.json())
     .then((data) => {
       const lunas = data.filter((item) =>
-        item.status?.toLowerCase() !== "belum bayar"
+        item.status?.toLowerCase() === "sudah bayar"
       );
 
       const belumLunas = data.filter((item) =>
-        item.status?.toLowerCase() === "belum bayar"
+        item.status?.toLowerCase() !== "sudah bayar"
       );
 
-      setTagihanBelumDibayar(lunas);
-      setTagihanSudahDibayar(belumLunas);
+      setTagihanBelumDibayar(belumLunas);
+      setTagihanSudahDibayar(lunas);
     })
     .catch(() => {
       setTagihanBelumDibayar([]);

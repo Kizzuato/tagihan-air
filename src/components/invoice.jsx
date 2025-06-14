@@ -4,27 +4,26 @@ import axios from "axios";
 import moment from "moment";
 
 const InvoiceTagihan = () => {
-  const { id_tagihan } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { id_tagihan } = useParams();
 
   useEffect(() => {
+    const getDataTagihan = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/tagihan/${id_tagihan}`
+        );
+        setData(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Gagal fetch tagihan:", error);
+        setLoading(false);
+      }
+    };
     getDataTagihan();
-  }, []);
-
-  const getDataTagihan = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/tagihan/${id_tagihan}`
-      );
-      setData(res.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Gagal fetch tagihan:", error);
-      setLoading(false);
-    }
-  };
+  }, [id_tagihan]);
 
   if (loading) return <p>Loading...</p>;
   if (!data) return <p>Data tidak ditemukan.</p>;
@@ -70,7 +69,7 @@ const InvoiceTagihan = () => {
         onClick={() => navigate(-1)} // kembali ke halaman sebelumnya
         style={{
           marginTop: "24px",
-        //   background: "#ccc",
+          //   background: "#ccc",
           color: "#333",
           border: "none",
           padding: "10px 20px",

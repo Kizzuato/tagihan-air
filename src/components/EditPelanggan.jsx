@@ -16,6 +16,19 @@ const EditPelanggan = () => {
   const { id_pelanggan } = useParams();
 
   useEffect(() => {
+    const getPelangganById = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/pelanggan/${id_pelanggan}`);
+        setNama(response.data.nama_pelanggan);
+        setAlamat(response.data.alamat);
+        setNoHp(response.data.no_hp);
+        setUserId(response.data.id_user);
+        setStatus(response.data.status);
+        setLayananId(response.data.id_layanan);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getPelangganById();
     fetch("http://localhost:5000/user")
       .then(res => res.json())
@@ -28,22 +41,8 @@ const EditPelanggan = () => {
       .then(res => res.json())
       .then(data => setLayanans(data))
       .catch(() => setLayanans([]));
-    // eslint-disable-next-line
-  }, []);
+  }, [id_pelanggan]);
 
-  const getPelangganById = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/pelanggan/${id_pelanggan}`);
-      setNama(response.data.nama_pelanggan);
-      setAlamat(response.data.alamat);
-      setNoHp(response.data.no_hp);
-      setUserId(response.data.id_user);
-      setStatus(response.data.status);
-      setLayananId(response.data.id_layanan);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   async function updatePelanggan(e) {
     e.preventDefault();

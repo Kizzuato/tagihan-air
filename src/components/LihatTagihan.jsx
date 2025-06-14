@@ -6,10 +6,15 @@ import "../css/global.css"
 const LihatTagihan = () => {
   const [tagihan, setTagihan] = useState([]);
   const navigate = useNavigate();
+  const pelanggan = JSON.parse(sessionStorage.getItem("pelanggan"));
+
   useEffect(() => {
     fetch("http://localhost:5000/tagihan")
       .then((res) => res.json())
-      .then((data) => setTagihan(Array.isArray(data) ? data : []))
+      .then((data) => {
+        const tagihan = data.filter((item) => item.pakai?.id_pelanggan === pelanggan.id_pelanggan);
+        setTagihan(tagihan);
+      })
       .catch(() => setTagihan([]));
   }, []);
 

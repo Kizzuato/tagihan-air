@@ -14,15 +14,11 @@ const DaftarTagihanLunas = () => {
       .then((res) => res.json())
       .then((data) => {
         setTagihanLunas(
-          data.filter((item) => item.status?.toLowerCase() !== "belum bayar")
+          data.filter((item) => item.status?.toLowerCase() === "sudah bayar")
         );
       })
       .catch(() => setTagihanLunas([]));
   }, []);
-  const handleDeleteClick = (item) => {
-    setSelectedTagihan(item);
-    setShowDeleteModal(true);
-  };
   
   const handleCloseDeleteModal = () => {
     setShowDeleteModal(false);
