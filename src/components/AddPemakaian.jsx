@@ -16,38 +16,43 @@ const AddPemakaian = () => {
   const navigate = useNavigate();
 
   // Ambil data pelanggan & bulan
+  // Ambil data pelanggan dan bulan (hanya sekali saat awal)
   useEffect(() => {
     fetch("http://localhost:5000/pelanggan")
-      .then(res => res.json())
-      .then(data => setPelangganList(data))
+      .then((res) => res.json())
+      .then((data) => setPelangganList(data))
       .catch(() => setPelangganList([]));
+
     fetch("http://localhost:5000/bulan")
-      .then(res => res.json())
-      .then(data => setBulanList(data))
+      .then((res) => res.json())
+      .then((data) => setBulanList(data))
       .catch(() => setBulanList([]));
   }, []);
 
-  // Ambil meter awal otomatis jika pelanggan, bulan, tahun terisi
+  // Ambil meter awal berdasarkan pilihan
   useEffect(() => {
     const getMeterAwal = async () => {
       if (id_pelanggan && id_bulan && tahun && bulanList.length > 0) {
-        const idxBulan = bulanList.findIndex(b => String(b.id_bulan) === String(id_bulan));
+        const idxBulan = bulanList.findIndex(
+          (b) => String(b.id_bulan) === String(id_bulan)
+        );
         let prevBulan = null;
         let prevTahun = tahun;
+
         if (idxBulan > 0) {
           prevBulan = bulanList[idxBulan - 1].id_bulan;
         } else if (idxBulan === 0) {
           prevBulan = bulanList[bulanList.length - 1].id_bulan;
-          prevTahun = (parseInt(tahun) - 1).toString();
         }
+
         console.log("PARAMS:", { id_pelanggan, prevBulan, prevTahun });
         if (prevBulan) {
           try {
             const res = await fetch(
-              `http://localhost:5000/pakai/last?pelanggan=${id_pelanggan}&bulan=${prevBulan}&tahun=${prevTahun}`
+              `http://localhost:5000/pakai/last?pelanggan=${id_pelanggan}&bulan=${prevBulan}&tahun=${parseInt(tahun)}`
             );
             const data = await res.json();
-            console.log("API RESULT:", data);
+            console.log("HASIL: ", data);
             if (data && data.akhir !== undefined && data.akhir !== null) {
               setAwal(data.akhir);
               return;
@@ -61,6 +66,7 @@ const AddPemakaian = () => {
         setAwal(0);
       }
     };
+
     getMeterAwal();
   }, [id_pelanggan, id_bulan, tahun, bulanList]);
 
@@ -113,29 +119,33 @@ const AddPemakaian = () => {
 
   return (
     <div style={{ minHeight: "100vh", background: "#f5f6fa" }}>
-      <h2 style={{
-        textAlign: "center",
-        color: "#5ba4e6",
-        fontWeight: "bold",
-        paddingTop: "32px",
-        marginBottom: "24px"
-      }}>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "#5ba4e6",
+          fontWeight: "bold",
+          paddingTop: "32px",
+          marginBottom: "24px",
+        }}
+      >
         Tambah Pemakaian
       </h2>
-      <div style={{
-        maxWidth: 400,
-        margin: "0 auto",
-        background: "#fff",
-        borderRadius: 12,
-        boxShadow: "0 2px 8px rgba(25, 118, 210, 0.08)",
-        padding: "32px 28px"
-      }}>
+      <div
+        style={{
+          maxWidth: 400,
+          margin: "0 auto",
+          background: "#fff",
+          borderRadius: 12,
+          boxShadow: "0 2px 8px rgba(25, 118, 210, 0.08)",
+          padding: "32px 28px",
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: 18 }}>
             <label style={{ fontWeight: "bold" }}>Pelanggan:</label>
             <select
               value={id_pelanggan}
-              onChange={e => setIdPelanggan(e.target.value)}
+              onChange={(e) => setIdPelanggan(e.target.value)}
               style={{
                 width: "100%",
                 padding: "8px 12px",
@@ -143,12 +153,12 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
               required
             >
               <option value="">Pilih Pelanggan</option>
-              {pelangganList.map(p => (
+              {pelangganList.map((p) => (
                 <option key={p.id_pelanggan} value={p.id_pelanggan}>
                   {p.nama_pelanggan}
                 </option>
@@ -159,7 +169,7 @@ const AddPemakaian = () => {
             <label style={{ fontWeight: "bold" }}>Bulan:</label>
             <select
               value={id_bulan}
-              onChange={e => setIdBulan(e.target.value)}
+              onChange={(e) => setIdBulan(e.target.value)}
               style={{
                 width: "100%",
                 padding: "8px 12px",
@@ -167,12 +177,12 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
               required
             >
               <option value="">Pilih Bulan</option>
-              {bulanList.map(b => (
+              {bulanList.map((b) => (
                 <option key={b.id_bulan} value={b.id_bulan}>
                   {b.nama_bulan}
                 </option>
@@ -184,7 +194,7 @@ const AddPemakaian = () => {
             <input
               type="number"
               value={tahun}
-              onChange={e => setTahun(e.target.value)}
+              onChange={(e) => setTahun(e.target.value)}
               style={{
                 width: "100%",
                 padding: "8px 12px",
@@ -192,7 +202,7 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
               required
             />
@@ -210,7 +220,7 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
             />
           </div>
@@ -219,7 +229,9 @@ const AddPemakaian = () => {
             <input
               type="number"
               value={akhir}
-              onChange={e => setAkhir(e.target.value === "" ? "" : parseInt(e.target.value))}
+              onChange={(e) =>
+                setAkhir(e.target.value === "" ? "" : parseInt(e.target.value))
+              }
               style={{
                 width: "100%",
                 padding: "8px 12px",
@@ -227,7 +239,7 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
               required
             />
@@ -245,7 +257,7 @@ const AddPemakaian = () => {
                 border: "1px solid #ddd",
                 marginTop: 6,
                 fontSize: "1rem",
-                background: "#f7f7f7"
+                background: "#f7f7f7",
               }}
             />
           </div>
@@ -259,7 +271,7 @@ const AddPemakaian = () => {
               width: 100,
               fontWeight: "bold",
               fontSize: "1rem",
-              marginTop: 8
+              marginTop: 8,
             }}
           >
             Simpan
@@ -272,14 +284,36 @@ const AddPemakaian = () => {
           <div className="modal-box">
             <div className="modal-icon">
               <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#4caf50" strokeWidth="4"/>
-                <polyline points="28,42 38,52 54,34" fill="none" stroke="#4caf50" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  fill="none"
+                  stroke="#4caf50"
+                  strokeWidth="4"
+                />
+                <polyline
+                  points="28,42 38,52 54,34"
+                  fill="none"
+                  stroke="#4caf50"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
-            <div className="modal-title" style={{ color: "#4caf50" }}>Berhasil!</div>
+            <div className="modal-title" style={{ color: "#4caf50" }}>
+              Berhasil!
+            </div>
             <div className="modal-text">Data pemakaian berhasil disimpan.</div>
             <div className="modal-actions">
-              <button className="btn-logout" style={{ background: "#4caf50" }} onClick={handleCloseSuccessModal}>OK</button>
+              <button
+                className="btn-logout"
+                style={{ background: "#4caf50" }}
+                onClick={handleCloseSuccessModal}
+              >
+                OK
+              </button>
             </div>
           </div>
         </div>
